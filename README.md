@@ -1,9 +1,58 @@
 # Discord ExportBot
 
-A powerful utility for transferring Discord message exports to live Discord channels. This tool allows you to read message JSON exports and either:
+A powerful Discord bot for importing and managing Discord message exports. This bot allows you to:
 
-1. Display them in the terminal/console (local mode)
-2. Post them to a Discord channel through a bot (discord mode)
+- Import Discord message exports to a Discord channel
+- Filter messages by user or content
+- Delete messages in bulk
+- Process message exports locally without Discord
+- View estimated completion times for long operations
+
+## Features
+
+- 📥 Import messages from JSON exports
+- 🔍 Filter by username or content
+- ⏱️ Real-time progress tracking in console
+- 🧹 Clean up messages with various options
+- 📚 Local message viewing mode
+- 🤖 Interactive Discord command mode
+- 🔄 Reverse message ordering option
+- ⏳ Time remaining estimates and ETA
+- 🗑️ Full channel message deletion
+
+## Installation
+
+1. Download `discordbot.py` from GitHub or directly from where you found it.
+
+2. Install dependencies:
+   ```
+   pip install discord.py
+   ```
+
+3. Create a Discord bot in the [Discord Developer Portal](https://discord.com/developers/applications)
+   - Create a new application
+   - Go to the "Bot" tab and click "Add Bot"
+   - Under "Privileged Gateway Intents", enable "MESSAGE CONTENT INTENT"
+   - Copy your bot token (you'll need this later)
+
+4. Invite the bot to your server:
+   - Go to the "OAuth2" tab in the Developer Portal
+   - In the URL Generator, select "bot" scope
+   - Select the following permissions:
+     - Read Messages/View Channels
+     - Send Messages
+     - Manage Messages (for deletion features)
+     - Read Message History
+   - Copy the generated URL and open it in a browser
+   - Select your server and authorize the bot
+
+## Usage
+
+The bot can be used in three different modes:
+
+### 1. Discord Mode (Default)
+
+This mode posts messages from a JSON file to a Discord channel.
 
 ## ✨ Features
 
@@ -68,7 +117,7 @@ A powerful utility for transferring Discord message exports to live Discord chan
 ### Basic Discord Mode (Default)
 
 ```bash
-python exportbot.py
+python discordbot.py
 ```
 
 This will:
@@ -79,7 +128,7 @@ This will:
 ### Advanced Discord Mode
 
 ```bash
-python exportbot.py discord --file custom.json --limit 100 --reverse --clean --channel 123456789012345678
+python discordbot.py discord --file custom.json --limit 100 --reverse --clean --channel 123456789012345678
 ```
 
 Options:
@@ -93,7 +142,7 @@ Options:
 ### Local Mode (No Discord)
 
 ```bash
-python exportbot.py local --file export.json --user "johndoe" --search "hello" --output results.txt
+python discordbot.py local --file export.json --user "johndoe" --search "hello" --output results.txt
 ```
 
 Options:
@@ -109,22 +158,22 @@ Options:
 
 **Transfer 50 most recent messages:**
 ```bash
-python exportbot.py --limit 50 --reverse
+python discordbot.py --limit 50 --reverse
 ```
 
 **Clean up previous bot messages and post new ones:**
 ```bash
-python exportbot.py --clean
+python discordbot.py --clean
 ```
 
 **Filter messages locally from a specific user:**
 ```bash
-python exportbot.py local --user "username" --output user_messages.txt
+python discordbot.py local --user "username" --output user_messages.txt
 ```
 
 **Search for messages containing specific text:**
 ```bash
-python exportbot.py local --search "keyword" --output search_results.txt
+python discordbot.py local --search "keyword" --output search_results.txt
 ```
 
 ## 💾 JSON Format
@@ -167,3 +216,16 @@ If you need help with this tool, please contact me through my Discord profile.
 ## 📄 License
 
 MIT 
+
+Once running, you can use these commands in Discord:
+- `!help` - Shows help information
+- `!post [limit]` - Posts messages from messages.json
+- `!reverse` - Posts messages in reverse order
+- `!filter <username>` - Only post messages from a specific user
+- `!search <term>` - Only post messages containing a specific term
+- `!clean` - Clean up previous messages sent by this bot
+- `!deleteall` - Delete ALL messages in the channel
+
+### 3. Local Mode
+
+This mode processes messages locally without Discord. 
